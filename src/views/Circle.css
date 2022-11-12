@@ -1,0 +1,11 @@
+.circle{
+    
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr;
+}
