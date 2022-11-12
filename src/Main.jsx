@@ -1,5 +1,7 @@
 import React from "react";
+import Buttons from "./views/Buttons";
 import Circles from "./views/Circles";
+import Endgame from "./views/Endgame";
 
 class Main extends React.Component {
   state = {
@@ -8,17 +10,12 @@ class Main extends React.Component {
     timeinterval: 10,
     circleNo: 0,
     scores: 0,
+    counter:0,
+    newstyle:"",
+    
   };
 
-  IncreaseLevel = () => {
-    const num = this.state.circles.length + 1;
-    let newCircle = [...this.state.circles, num];
-    this.setState({
-      ...this.state,
-      circles: newCircle,
-    });
-    console.log(this.state.circles);
-  };
+
 
   gameCircles = () =>
     this.state.circles.map((item, index) => {
@@ -43,15 +40,28 @@ class Main extends React.Component {
     }
   };
 
+
+EndGameHandle = () =>{
+  return (
+<Endgame scores={this.state.scores}/>
+  );
+}
+
   ClickHandler = (e, index) => {
     let nextCircle = this.RandomNumber(index, this.state.circles.length);
-
+  
     if (index === this.state.circleNo) {
+      
       this.setState({
         scores: this.state.scores + 1,
         circleNo: nextCircle,
+        counter: this.state.counter + 1,
       });
-    } else {
+      if (this.state.counter ===4){
+        this.ScoreReward(this.state.scores);
+      }
+    } 
+    else {
       this.setState({
         circleNo: nextCircle,
         lives: this.state.lives - 1,
@@ -59,22 +69,46 @@ class Main extends React.Component {
     }
   };
 
+  ScoreReward = () =>{
+
+    this.IncreaseLevel()
+ 
+    if (this.state.scores >= 5){
+      this.setState({
+        newstyle : "endGame",
+        
+      })
+    }
+  }
+
+  IncreaseLevel = () => {
+    const num = this.state.circles.length + 1;
+    let newCircle = [...this.state.circles, num];
+    console.log(newCircle,num);
+    this.setState({
+      circles: newCircle,
+      counter:0
+    });
+    console.log(this.state.circles);
+  };
+
   render() {
     return (
-      <div>
-        <div>
+      <div className={this.state.scores > 4 ? this.state.newstyle : ''}>
+        <div >
           <p>Score: {this.state.scores}</p>
           <p>Lives : {this.state.lives}</p>
         </div>
         <div
           style={{
             width: "70%",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr ",
-          }}
-        >
-          {this.gameCircles()}
+            display: "flex",
+            gap:"2rem",
+            flexWrap:"wrap",
+          }}>
+          {this.state.lives > 0 ? this.gameCircles() : this.EndGameHandle() }
         </div>
+        <Buttons/>
       </div>
     );
   }

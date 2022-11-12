@@ -5,7 +5,7 @@ import Main from './Main';
 function App() {
   return (
     <div className="App">
-      Welcome
+      Welcome : rainbow collector
       <Main/>
     </div>
   );

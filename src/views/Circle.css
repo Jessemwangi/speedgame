@@ -1,11 +1,36 @@
 .circle{
-    
-    width: 150px;
-    height: 150px;
+    cursor: crosshair;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background-color: beige;
     display: flex;
     flex-direction: column;
     justify-content: center;
     grid-template-columns: 1fr 1fr 1fr;
+}
+
+.Active{
+    background-image: url('../assets/gamemode.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.InActive{
+    background-color: green;
+}
+
+.endGame
+{
+    background-color: black;
+    width: 100%;
+    height: 60vh;
+}
+.above20{
+background-image: url('../assets/hurray.webp');
+background: no-repeat center/cover; 
+}
+.below20{
+    background-image: url('../assets/lowerrank.gif');
+/* background: no-repeat center/cover; */
 }
