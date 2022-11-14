@@ -1,0 +1,33 @@
+.above20{
+    background: url('./assets/hurray.webp') no-repeat  center;
+    background-size: contain;
+    transition: 1s ease-in;
+    }
+
+    .above40{
+        background: url('./assets/above40.gif') no-repeat center;
+        background-size: contain;
+        transition: 1s ease-in;
+        }
+        .above60{
+            background: url('./assets/above60.gif') no-repeat  center;
+            background-size: contain;
+            transition: 1s ease-in;
+       }
+       .above80{
+        background: url('./assets/above80.gif') no-repeat  center;
+        background-size: contain;
+        transition: 1s ease-in;
+   }  
+   .above100{
+    background: url('./assets/above100.webp') no-repeat  center;
+    background-size: contain;
+    transition: 1s ease-in;
+} 
+    .below20{
+        background-image: url('./assets/lowerrank.gif');
+        background-repeat: no-repeat;
+        background-size: cover; 
+        transition: 2s ease-in;
+    /* background: no-repeat center/cover; */
+    }

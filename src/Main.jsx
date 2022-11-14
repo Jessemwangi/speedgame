@@ -2,19 +2,42 @@ import React from "react";
 import Buttons from "./views/Buttons";
 import Circles from "./views/Circles";
 import Endgame from "./views/Endgame";
+import GameLifes from "./views/GameLifes";
+import './Main.css';
 
 class Main extends React.Component {
   state = {
     circles: [1, 2, 3, 4],
     lives: 5,
     timeinterval: 10,
-    circleNo: 0,
+    circleNo: '',
     scores: 0,
-    counter:0,
-    newstyle:"",
-    
+    counter: 0,
+    newstyle: "",
+    heartActive: <span>&#10084;&#65039;</span>,
+    lifeArray: [1, 2, 3, 4, 5,6]
   };
 
+   gametimeout;
+  startgame = (e) => {
+   
+
+      let nextCircle = this.RandomNumber(0, this.state.circles.length);
+      this.setState({
+        gamestart: true,
+        circleNo: nextCircle,
+       
+      })
+   
+     this.gametimeout = setTimeout(this.startgame, 1000)
+    if (this.state.lives >= 0) {
+
+      this.state.lifeArray.splice(this.state.lives, 1);
+    }
+    else {
+      this.EndGameHandle();
+    }
+  }
 
 
   gameCircles = () =>
@@ -30,6 +53,7 @@ class Main extends React.Component {
       );
     });
 
+
   RandomNumber = (currentvalue, CArrayLength) => {
     let randomno = Math.floor(Math.random() * CArrayLength);
 
@@ -41,74 +65,129 @@ class Main extends React.Component {
   };
 
 
-EndGameHandle = () =>{
-  return (
-<Endgame scores={this.state.scores}/>
-  );
-}
+  EndGameHandle = () => {
+    clearTimeout(this.gametimeout);
+    return (
+      <Endgame scores={this.state.scores} />
+    );
+  }
+
 
   ClickHandler = (e, index) => {
-    let nextCircle = this.RandomNumber(index, this.state.circles.length);
-  
+    // let nextCircle = this.RandomNumber(index, this.state.circles.length);
+
     if (index === this.state.circleNo) {
-      
+
       this.setState({
         scores: this.state.scores + 1,
-        circleNo: nextCircle,
+        // circleNo: nextCircle,
         counter: this.state.counter + 1,
       });
-      if (this.state.counter ===4){
-        this.ScoreReward(this.state.scores);
+
+      if (this.state.counter === 2) {
+        this.ScoreReward();
       }
-    } 
+    }
     else {
       this.setState({
-        circleNo: nextCircle,
+        // circleNo: nextCircle,
         lives: this.state.lives - 1,
+        
       });
+      if (this.state.lives === 0) {
+        this.EndGameHandle();
+      }
+      this.state.lifeArray.splice(this.state.lives, 1);
     }
   };
 
-  ScoreReward = () =>{
+
+  ScoreReward = () => {
 
     this.IncreaseLevel()
- 
-    if (this.state.scores >= 5){
+    if (this.state.scores >= 15) {
       this.setState({
-        newstyle : "endGame",
-        
-      })
+        newstyle: "above100",
+
+      });
+    }
+    else if (this.state.scores >= 14) {
+      this.setState({
+        newstyle: "above80",
+
+      });
+    }
+    else if (this.state.scores >= 11) {
+      this.setState({
+        newstyle: "above60",
+
+      });
+    }
+    else if (this.state.scores >= 8) {
+      this.setState({
+        newstyle: "above40",
+
+      });
+    }
+    else if (this.state.scores >= 5) {
+      this.setState({
+        newstyle: "above20",
+
+      });
+    }
+    else {
+      this.setState({
+        newstyle: "",
+
+      });
     }
   }
 
   IncreaseLevel = () => {
     const num = this.state.circles.length + 1;
     let newCircle = [...this.state.circles, num];
-    console.log(newCircle,num);
     this.setState({
       circles: newCircle,
-      counter:0
+      counter: 0
     });
-    console.log(this.state.circles);
+
   };
 
   render() {
+
+    const GameLifesHearts = this.state.lifeArray.map((index) => {
+
+      return (
+        <GameLifes key={index} hearts={this.state.heartActive} />
+
+      );
+
+    });
+
+
     return (
-      <div className={this.state.scores > 4 ? this.state.newstyle : ''}>
-        <div >
-          <p>Score: {this.state.scores}</p>
-          <p>Lives : {this.state.lives}</p>
+      <div className={this.state.newstyle}>
+        <div>
+          <div >
+            <p>Score: {this.state.scores}</p>
+
+            <div style={{ display: "inline-block" }}>
+              Lives  : {this.state.lives}  ,
+              {GameLifesHearts}
+            </div>
+          </div>
+          <div
+            style={{
+              width: "70%",
+              display: "flex",
+              gap: "2rem",
+              flexWrap: "wrap",
+            }}>
+            {this.state.lives > 0 ? this.gameCircles() : this.EndGameHandle()}
+          </div>
         </div>
-        <div
-          style={{
-            width: "70%",
-            display: "flex",
-            gap:"2rem",
-            flexWrap:"wrap",
-          }}>
-          {this.state.lives > 0 ? this.gameCircles() : this.EndGameHandle() }
-        </div>
-        <Buttons/>
+        <Buttons startgame={(e) => this.startgame(e)} />
+
       </div>
     );
   }
