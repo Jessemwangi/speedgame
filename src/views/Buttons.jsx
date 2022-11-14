@@ -1,13 +1,18 @@
-import React from 'react';
-import './Button.css';
+import React from "react";
+import "./Button.css";
 
 function Buttons(props) {
-    return (
-        <div>
-            <button className='btstart' onClick={props.startgame}>Start Game</button>
-            <button className='btend'>End Game</button>
-        </div>
-    );
+  return (
+    <div>
+      {props.start ? (
+        <button className="btend">End Game</button>
+      ) : (
+        <button className="btstart" onClick={props.StartGameHandle}>
+          Start Game
+        </button>
+      )}
+    </div>
+  );
 }
 
 export default Buttons;

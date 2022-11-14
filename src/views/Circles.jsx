@@ -4,17 +4,17 @@ const Circles = (props) => {
   return (
     <div
       // style={{
-        
-      //   backgroundColor: props.index === props.circleNo 
+
+      //   backgroundColor: props.index === props.circleNo
       //   ? "red" : "blue" //radial-gradient(circle, blue 30%, pink 50%, red 20%, blue 10%)
       // }}
-      
-      className={props.index === props.circleNo 
-      ? "circle Active" : "circle InActive"}
-      onClick={props.Cclicked}>
-        
-        <p>{props.index}</p>
-     
+
+      className={
+        props.index === props.circleNo ? "circle Active" : "circle InActive"
+      }
+      onClick={props.start ? props.Cclicked :null}
+    >
+      <p>{props.index}</p>
     </div>
   );
 };
