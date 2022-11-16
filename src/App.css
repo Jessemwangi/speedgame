@@ -1,7 +1,19 @@
 .App {
+  margin: 0 auto;
   text-align: center;
-}
 
+}
+.rainbow{
+  background-image: url('https://source.unsplash.com/500x400/?rainbow');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 5vh;
+  border-radius: 20px 20px 0 0;
+  font-size: 48px;
+  padding: 3rem;
+  color:red;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

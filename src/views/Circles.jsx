@@ -12,7 +12,8 @@ const Circles = (props) => {
       className={
         props.index === props.circleNo ? "circle Active" : "circle InActive"
       }
-      onClick={props.start ? props.Cclicked :null}
+      // onClick={props.gameStart ? props.Cclicked :null}
+      onClick={props.gameStart ? props.Cclicked : null}
     >
       <p>{props.index}</p>
     </div>

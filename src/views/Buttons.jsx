@@ -4,8 +4,8 @@ import "./Button.css";
 function Buttons(props) {
   return (
     <div>
-      {props.start ? (
-        <button className="btend">End Game</button>
+      {props.start ==='true' ? (
+        <button className="btend" onClick={props.EndGameHandler}>End Game</button>
       ) : (
         <button className="btstart" onClick={props.StartGameHandle}>
           Start Game

@@ -2,12 +2,15 @@
     cursor: crosshair;
     width: 200px;
     height: 200px;
+    border-style: groove;
     border-radius: 50%;
     background-color: beige;
     display: flex;
     flex-direction: column;
     justify-content: center;
     grid-template-columns: 1fr 1fr 1fr;
+    box-shadow: inset 3px 3px 30px black;
+    
 }
 
 .Active{
