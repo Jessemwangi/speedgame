@@ -25,11 +25,14 @@ class Main extends React.Component {
     timeinterval: 1500,
     circleNo: undefined,
     scores: 0,
-    counter: 2, // help in culculating fails
+    pace:20,
+    counter: 0, // help in culculating fails
     newstyle: "",
     heartActive: <span>&#10084;&#65039;</span>,
     timeElaspse: 0,
     showmodal:false,
+    sounds:false,
+    slidesound:'off'
   };
 
   gametimeout;
@@ -37,8 +40,10 @@ class Main extends React.Component {
 
   nextCircle = () => {
     let nextActive;
-    
-    mybgsoung.play()
+    if (this.state.slidesound ==='on'){
+      mybgsoung.play()
+    }
+   
     if (this.state.timeElaspse >= 10 || this.state.lives === 0) {
       this.EndGameHandle();
       return;
@@ -57,7 +62,10 @@ class Main extends React.Component {
   };
 
   StartGameHandle = (e) => {
-    gamestart.play();
+    if (this.state.slidesound ==='on'){
+      gamestart.play();
+    }
+   
     this.setState({
       lives: 5,
       timeElaspse: 0,
@@ -97,7 +105,9 @@ window.location.reload();
   }
 
   EndGameHandle = (e) => {
+    if (this.state.slidesound ==='on'){
     goal.play();
+    }
     clearTimeout(this.gametimeout);
     this.setState({
       gameStart: 'false',
@@ -112,15 +122,23 @@ window.location.reload();
     console.log(index, this.state.circleNo);
 
     if (index === this.state.circleNo) {
-      scoresound.play();
+      if (this.state.slidesound ==='on'){
+      scoresound.play();}
       this.setState({
         scores: this.state.scores + 1,
         counter: this.state.counter + 1,
         timeElaspse: this.state.timeElaspse - 1,
        
       });
-      if (this.state.scores >= 20) {
+      if (this.state.scores >= 3) {
+        this.setState({
+          timeinterval: this.state.timeinterval - (this.state.scores/this.state.pace)
+        })
         this.ScoreReward();
+      }
+      if (this.state.counter === 20)
+      {
+        this.IncreaseLevel();
       }
     } else {
       this.setState({
@@ -136,31 +154,34 @@ window.location.reload();
       this.lifeArray.pop();
 
     }
-    console.log(this.lifeArray.length);
+    console.log(this.state.counter);
   };
 
   ScoreReward = () => {
-    this.IncreaseLevel();
-    if (this.state.scores >= 15) {
+    
+    if (this.state.scores >= 5) {
       this.setState({
-        newstyle: "above100",
+        newstyle: "above20",    
       });
-    } else if (this.state.scores >= 14) {
-      this.setState({
-        newstyle: "above80",
-      });
-    } else if (this.state.scores >= 11) {
-      this.setState({
-        newstyle: "above60",
-      });
-    } else if (this.state.scores >= 8) {
+    } else if (this.state.scores >= 7) {
       this.setState({
         newstyle: "above40",
+       
       });
-    } else if (this.state.scores >= 5) {
+    } else if (this.state.scores >= 9) {
       this.setState({
-        newstyle: "above20",
-        timeinterval: this.state.timeinterval * 0.09,
+        newstyle: "above60",
+       
+      });
+    } else if (this.state.scores >= 12) {
+      this.setState({
+        newstyle: "above80",
+        
+      });
+    } else if (this.state.scores >= 15) {
+      this.setState({
+        newstyle: "above100",
+        
       });
     } else {
       this.setState({
@@ -178,13 +199,40 @@ window.location.reload();
     });
   };
   
+  ChangeSounds = () => {
+    if (this.state.sounds === true){
+      this.setState({
+        sounds : false,
+        slidesound:'off'
+      })
+      console.log('button goes off', this.state.sounds, this.state.slidesound)
+    }
+      else if (this.state.sounds === false){
+        this.setState({
+          sounds : true,
+          slidesound:'on'
+        })
+        console.log('button goes on', this.state.sounds, this.state.slidesound)
+      }
+
+  }
   render() {
     const GameLifesHearts = this.lifeArray.map((index) => {
       return <GameLifes key={Math.random()} hearts={this.state.heartActive} />;
     });
   
     return (
-      <div className={this.state.newstyle + 'maindiv'}>
+      <div className={this.state.newstyle + ' maindiv'}>
+        <div className="setting">
+          <div className="soundsetting">
+            <p style={{paddingRight:"1rem"}}>sounds : {this.state.slidesound}</p>
+            <div onClick={(e)=>this.ChangeSounds(e)}
+            className= {this.state.slidesound + ' soundsOnOf'}>
+              <div className="soundControl" ></div>
+            </div>
+          </div>
+         
+        </div>
         <main>
      
           <div className="gameStatistics">
@@ -207,7 +255,7 @@ window.location.reload();
             {this.state.lives > 0 ? (
               this.gameCircles()
             ) : (
-              <Endgame scores={this.state.scores} />
+              <Endgame scores={this.state.scores}  celebrate = {this.state.newstyle }/>
             )}
           </div>
         </main>

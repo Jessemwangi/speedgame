@@ -46,3 +46,43 @@ main{
         transition: 2s ease-in;
     /* background: no-repeat center/cover; */
     }
+    .endGame
+{
+    background-color: black;
+    width: 100%;
+    height: 60vh;
+}
+.setting{
+    width: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+ 
+}
+.soundsetting{
+    color: black;
+    width: 100px;
+    border: dotted black 3px;
+    padding: 0.5rem;
+
+}
+.soundsOnOf{
+    display: flex;
+    width: 100%;
+    padding: 3px;
+    border-radius: 12px;
+}
+.off{
+    flex-direction: row-reverse;
+    background-color: dimgray;
+}
+.on{
+    flex-direction: row;
+    background-color: greenyellow;
+}
+.soundControl{
+    width: 20px;
+    border-radius: 50%;
+    padding: 1rem;
+    background-color: #ffffff;
+}

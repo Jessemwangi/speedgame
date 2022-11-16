@@ -1,9 +1,9 @@
 import React from 'react';
-import "./Circle.css";
+import "../Main.css";
 
 const Endgame = (props) => {
     return (
-        <div  className={props.scores >2 ? 'endGame above20' : 'endGame below20'}>
+        <div  className={props.celebrate || 'endGame below20'}>
             {props.scores}
         </div>
     );
