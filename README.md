@@ -14,8 +14,7 @@ Built with:
 - HTML
 - JS
 - CSS
-- Reactjs (basic class component with no hooks, pure class function)
-- ...
+- Reactjs (basic class component with no hooks, pure class function).
 
 ## Setup and usage
 

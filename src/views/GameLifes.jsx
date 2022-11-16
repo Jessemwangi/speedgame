@@ -6,7 +6,6 @@ function GameLifes(props) {
             
             <span  style={{fontSize:"70px"}}>
                 {props.hearts}
-                {/* &#10084;&#65039; */}
                 </span>
        
     );
