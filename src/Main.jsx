@@ -3,10 +3,21 @@ import Buttons from "./views/Buttons";
 import Circles from "./views/Circles";
 import Endgame from "./views/Endgame";
 import GameLifes from "./views/GameLifes";
+import click from "./sounds/start.wav";
+import scoresounds from "./sounds/rain.wav";
+import goals from "./sounds/goal.wav";
+import mybgsoungs from "./sounds/background.wav";
 import Modal from "./views/Modal";
 import "./Main.css";
 
+
+const mybgsoung = new Audio(mybgsoungs);
+const goal = new Audio(goals);
+const scoresound = new Audio(scoresounds);
+const gamestart = new Audio(click);
+
 class Main extends React.Component {
+  
   state = {
     circles: [1, 2, 3, 4],
     lives: 5,
@@ -26,7 +37,8 @@ class Main extends React.Component {
 
   nextCircle = () => {
     let nextActive;
-    console.log(this.lifeArray)
+    
+    mybgsoung.play()
     if (this.state.timeElaspse >= 10 || this.state.lives === 0) {
       this.EndGameHandle();
       return;
@@ -41,18 +53,17 @@ class Main extends React.Component {
       circleNo: nextActive,
       timeElaspse: this.state.timeElaspse + 1,
     });
-    console.log(this.state.timeElaspse);
+
   };
 
   StartGameHandle = (e) => {
-console.log("start");
+    gamestart.play();
     this.setState({
       lives: 5,
       timeElaspse: 0,
       gameStart: 'true',
     });
 
-    console.log(this.state.gameStart);
     this.nextCircle();
   };
 
@@ -86,7 +97,7 @@ window.location.reload();
   }
 
   EndGameHandle = (e) => {
-    console.log("end");
+    goal.play();
     clearTimeout(this.gametimeout);
     this.setState({
       gameStart: 'false',
@@ -101,12 +112,13 @@ window.location.reload();
     console.log(index, this.state.circleNo);
 
     if (index === this.state.circleNo) {
+      scoresound.play();
       this.setState({
         scores: this.state.scores + 1,
         counter: this.state.counter + 1,
         timeElaspse: this.state.timeElaspse - 1,
+       
       });
-
       if (this.state.scores >= 20) {
         this.ScoreReward();
       }
@@ -165,7 +177,7 @@ window.location.reload();
       counter: 0,
     });
   };
-
+  
   render() {
     const GameLifesHearts = this.lifeArray.map((index) => {
       return <GameLifes key={Math.random()} hearts={this.state.heartActive} />;
@@ -174,11 +186,12 @@ window.location.reload();
     return (
       <div className={this.state.newstyle + 'maindiv'}>
         <main>
+     
           <div className="gameStatistics">
             <p>Score: {this.state.scores}</p>
 
             <div style={{ display: "inline-block" }}>
-              Lives : {this.state.lives} ,{GameLifesHearts}
+             {GameLifesHearts}
             </div>
           </div>
           <div

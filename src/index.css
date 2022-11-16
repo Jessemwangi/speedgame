@@ -12,8 +12,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family:  "Press Start 2P", sans-serif;
     transition: all 2s ease-in-out;
-   background: linear-gradient(-45deg, #ee7752, #e01361, #23d547,#f2dc38, #8308cb, #a6dcae,#f304af);
+   background: linear-gradient(-45deg, #ee5252, #e01361, #23d547,#f2dc38, #8308cb, #a6dcae,#f304af);
    background-size: 400% 400%;
    animation: gradient 15s ease infinite;
   /* opacity: 0.8; */
+}
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  25% {
+      background-position: 50% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+}
+75% {
+  background-position: 50% 50%;
+}
+  100% {
+      background-position: 0% 50%;
+  }
 }
