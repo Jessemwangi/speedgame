@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/speedgame/static/css/main.24e3f0d6.css",
+    "main.js": "/speedgame/static/js/main.7364e25c.js",
+    "static/media/background.wav": "/speedgame/static/media/background.1410a48041d5794e3435.wav",
+    "static/media/endgame.gif": "/speedgame/static/media/endgame.11945a9abc9e2e9bd98d.gif",
+    "static/media/startgame.webp": "/speedgame/static/media/startgame.d7fe859986a45ebb55cd.webp",
+    "static/media/gamemode.gif": "/speedgame/static/media/gamemode.614f6379c50e4b73f396.gif",
+    "static/media/start.wav": "/speedgame/static/media/start.e088e564a251e9cca2b4.wav",
+    "static/media/above100.webp": "/speedgame/static/media/above100.b4b4691436fe3f4d7657.webp",
+    "static/media/above80.gif": "/speedgame/static/media/above80.c2a2c71ec8c58278532e.gif",
+    "static/media/goal.wav": "/speedgame/static/media/goal.a7022fca9be01d175603.wav",
+    "static/media/hurray.webp": "/speedgame/static/media/hurray.0ce327d872c2cfdb0111.webp",
+    "static/media/lowerrank.gif": "/speedgame/static/media/lowerrank.57117c0a76c70867262f.gif",
+    "static/media/rain.wav": "/speedgame/static/media/rain.c35ff8740d599628412b.wav",
+    "static/media/above60.gif": "/speedgame/static/media/above60.50a0dc03c239d4b8df0f.gif",
+    "static/media/above40.gif": "/speedgame/static/media/above40.982d849680a3d9801816.gif",
+    "index.html": "/speedgame/index.html",
+    "main.24e3f0d6.css.map": "/speedgame/static/css/main.24e3f0d6.css.map",
+    "main.7364e25c.js.map": "/speedgame/static/js/main.7364e25c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.24e3f0d6.css",
+    "static/js/main.7364e25c.js"
+  ]
+}
