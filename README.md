@@ -29,7 +29,7 @@ Live page [here]()
 
 ## Screenshot
 
-<img src='/Screenshot.png' alt ='Speed Game Web App' height="320px"/>
+<img src='https://github.com/Jessemwangi/speedgame/blob/master/src/Screenshot.png' align='center' alt ='Speed Game Web App' height="320px"/>
 
 ## coming up in the Second sprint
 
