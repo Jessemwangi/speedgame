@@ -24,7 +24,7 @@ Built with:
 2. unmute sound if you want the music
 3. for clonning, you need to install packages using the command [npm install // yarn install] run in terminal. 
 
-Live page [here]()
+Live page [<a href='https://jessemwangi.github.io/speedgame/'> Here </a>]()
 
 ## Screenshot
 
