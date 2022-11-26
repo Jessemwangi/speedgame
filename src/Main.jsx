@@ -19,7 +19,7 @@ const gamestart = new Audio(click);
 class Main extends React.Component {
 
   state = {
-    circles: [1, 2, 3, 4],
+    circles: 4,
     lives: 5,
     gameStart: 'false',
     timeinterval: 1500,
@@ -50,15 +50,18 @@ class Main extends React.Component {
     }
 
     this.timer = setTimeout(this.nextCircle, this.state.timeinterval);
+    console.log('active before', nextActive);
     nextActive = this.RandomNumber(
       this.state.circleNo,
-      this.state.circles.length
+      this.state.circles
     );
+    console.log('active after', nextActive);
     this.setState({
       circleNo: nextActive,
+     
       timeElaspse: this.state.timeElaspse + 1,
     });
-
+    console.log('asgn to state',this.state.circleNo);
   };
 
   StartGameHandle = (e) => {
@@ -76,33 +79,33 @@ class Main extends React.Component {
   };
 
   gameCircles = () =>
+{
+      let circle =[];
+    for (let i=0; i < this.state.circles;i++){
+      circle.push(<div key={i}>
+        <Circles
+          index={i}
+          gameStart={this.state.gameStart}
+          circleNo={this.state.circleNo}
+          Cclicked={(e) => this.ClickHandler(e, i)}
+        />
+      </div>)
 
-    //   let circle =[];
-  //   for (let i=0; i < this.state.circles;i++){
-  //     circle.push(<div key={i}>
-  //       <Circles
-  //         index={i}
-  //         gameStart={this.state.gameStart}
-  //         circleNo={this.state.circleNo}
-  //         Cclicked={(e) => this.ClickHandler(e, i)}
-  //       />
-  //     </div>)
-
-  //   }
-  //   return circle;
-  // }
-    this.state.circles.map((item, index) => {
-      return (
-        <div key={index}>
-          <Circles
-            index={index}
-            gameStart={this.state.gameStart}
-            circleNo={this.state.circleNo}
-            Cclicked={(e) => this.ClickHandler(e, index)}
-          />
-        </div>
-      );
-    });
+    }
+    return circle;
+  }
+    // this.state.circles.map((item, index) => {
+    //   return (
+    //     <div key={index}>
+    //       <Circles
+    //         index={index}
+    //         gameStart={this.state.gameStart}
+    //         circleNo={this.state.circleNo}
+    //         Cclicked={(e) => this.ClickHandler(e, index)}
+    //       />
+    //     </div>
+    //   );
+    // });
 
   RandomNumber = (currentvalue, CArrayLength) => {
     let randomno = Math.floor(Math.random() * CArrayLength);
@@ -134,7 +137,7 @@ class Main extends React.Component {
   };
 
   ClickHandler = (e, index) => {
-
+console.log(index);
     if (index === this.state.circleNo) {
       if (this.state.slidesound === 'on') {
         scoresound.play();
@@ -206,9 +209,9 @@ class Main extends React.Component {
 
   IncreaseLevel = () => {
     const num = this.state.circles.length + 1;
-    let newCircle = [...this.state.circles, num];
+    // let newCircle = [...this.state.circles, num];
     this.setState({
-      circles: newCircle,
+      circles: this.state.circles + 1,
       counter: 0,
     });
   };
