@@ -76,6 +76,21 @@ class Main extends React.Component {
   };
 
   gameCircles = () =>
+
+    //   let circle =[];
+  //   for (let i=0; i < this.state.circles;i++){
+  //     circle.push(<div key={i}>
+  //       <Circles
+  //         index={i}
+  //         gameStart={this.state.gameStart}
+  //         circleNo={this.state.circleNo}
+  //         Cclicked={(e) => this.ClickHandler(e, i)}
+  //       />
+  //     </div>)
+
+  //   }
+  //   return circle;
+  // }
     this.state.circles.map((item, index) => {
       return (
         <div key={index}>
