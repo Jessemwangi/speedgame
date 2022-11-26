@@ -32,7 +32,8 @@ class Main extends React.Component {
     timeElaspse: 0,
     showmodal: false,
     sounds: false,
-    slidesound: 'off'
+    slidesound: 'off',
+    clickHistory:[],
   };
 
   gametimeout;
@@ -50,18 +51,18 @@ class Main extends React.Component {
     }
 
     this.timer = setTimeout(this.nextCircle, this.state.timeinterval);
-    console.log('active before', nextActive);
+  
     nextActive = this.RandomNumber(
       this.state.circleNo,
       this.state.circles
     );
-    console.log('active after', nextActive);
+   
     this.setState({
       circleNo: nextActive,
      
       timeElaspse: this.state.timeElaspse + 1,
     });
-    console.log('asgn to state',this.state.circleNo);
+
   };
 
   StartGameHandle = (e) => {
@@ -137,7 +138,6 @@ class Main extends React.Component {
   };
 
   ClickHandler = (e, index) => {
-console.log(index);
     if (index === this.state.circleNo) {
       if (this.state.slidesound === 'on') {
         scoresound.play();
@@ -171,7 +171,13 @@ console.log(index);
       this.lifeArray.pop();
 
     }
-
+   
+    // const num = this.state.circles.length + 1;
+    // let newCircle = [...this.state.circles, num];
+this.setState({
+  clickHistory:[...this.state.clickHistory,{"clicked":index, "activeCirecle":this.state.circleNo}],
+})
+console.table(this.state.clickHistory);
   };
 
   ScoreReward = () => {
