@@ -214,7 +214,7 @@ console.table(this.state.clickHistory);
   };
 
   IncreaseLevel = () => {
-    const num = this.state.circles.length + 1;
+    // const num = this.state.circles.length + 1;
     // let newCircle = [...this.state.circles, num];
     this.setState({
       circles: this.state.circles + 1,
